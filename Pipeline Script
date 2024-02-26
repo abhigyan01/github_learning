@@ -60,7 +60,7 @@ pipeline {
                   //  docker.withRegistry("$DOCKER_REGISTRY", 'docker-credentials-id') {
                         def dockerImage = docker.image("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG")
                         dockerImage.push()
-                    }
+                   // }
                 }
                }  
          }
