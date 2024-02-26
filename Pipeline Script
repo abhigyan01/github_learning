@@ -8,6 +8,8 @@ pipeline {
         IMAGE_NAME = "jenkins"
         IMAGE_TAG = "latest"
         DOCKERFILE_PATH = "Dockerfile" // Path to your Dockerfile
+        DOCKER_REGISTRY = "abhigyan01/jenkins"
+        DOCKER_ACCESS_TOKEN = credentials('dckr_pat_E8MLIe_QpljOQE0NBCjgCpqiAUU')
     }
    // parameters {
      //   string(name:"person", defaultValue:"nothing", description:"")
@@ -55,21 +57,17 @@ pipeline {
                 }
             }
         }
-        
-         stage('Push Docker Image') {
+        stage('Push Docker Image') {
             steps {
-                script {
-                   /* // Push the Docker image to the registry
-                    docker.withRegistry("$DOCKER_REGISTRY", 'docker-credentials-id') {
-                        def dockerImage = docker.image("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG")
-                        dockerImage.push()*/
-                      //  docker login -u "$DOCKER_REGISTRY" -p "docker-credentials-id"
-                     //   withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                      //  sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY"
-                        sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
-                    
-                  }
-            }
-         }  
-     } 
+               script {
+                    // Login to Docker registry using access token
+                    withDockerRegistry([credentialsId: 'your-docker-access-token-id']) {
+                    sh "docker login -u _token -p $DOCKER_ACCESS_TOKEN $DOCKER_REGISTRY"
+                    }
+                   // Push Docker image to registry
+                    sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+                } 
+            }  
+        }
+    } 
 }
