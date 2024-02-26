@@ -29,7 +29,7 @@ pipeline {
         stage("build"){
             steps{
                 sh 'cal 10 2023'
-                echo "My name is $person "
+           //     echo "My name is $person "
             }
         }
         stage("deploy"){
