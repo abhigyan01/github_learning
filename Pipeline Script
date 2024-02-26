@@ -61,7 +61,7 @@ pipeline {
             steps {
                script {
                     // Login to Docker registry using access token
-                    withDockerRegistry([credentialsId: 'your-docker-access-token-id']) {
+                    withDockerRegistry([credentialsId: 'docker-credentials-id']) {
                     sh "docker login -u _token -p $DOCKER_ACCESS_TOKEN $DOCKER_REGISTRY"
                     }
                    // Push Docker image to registry
