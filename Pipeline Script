@@ -1,11 +1,11 @@
 pipeline {
     agent any
     
+
+
     environment {
-        name= "Abhigyan Bhattacharjee"
+         name= "Abhigyan Bhattacharjee"
         topics = 'DevOps'
-    }
-    environment {
         DOCKER_REGISTRY = "abhigyan01"
         IMAGE_NAME = "jenkins"
         IMAGE_TAG = "latest"
