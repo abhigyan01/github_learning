@@ -9,7 +9,7 @@ pipeline {
         IMAGE_TAG = "latest"
         DOCKERFILE_PATH = "Dockerfile" // Path to your Dockerfile
        // DOCKER_REGISTRY = "abhigyan01/jenkins"
-        DOCKER_ACCESS_TOKEN = credentials('dckr_pat_E8MLIe_QpljOQE0NBCjgCpqiAUU')
+        DOCKER_ACCESS_TOKEN = 'dckr_pat_E8MLIe_QpljOQE0NBCjgCpqiAUU'
     }
    // parameters {
      //   string(name:"person", defaultValue:"nothing", description:"")
