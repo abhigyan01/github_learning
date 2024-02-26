@@ -1,0 +1,45 @@
+pipeline {
+    agent any
+    
+    environment {
+        name= "Abhigyan Bhattacharjee"
+        topics = 'DevOps'
+    }
+   // parameters {
+     //   string(name:"person", defaultValue:"nothing", description:"")
+    //}
+    stages{
+        stage("Hello"){
+            steps{
+                echo "My name is $name"
+                echo "I want to work on $topics field, Here I am using global veriable"
+            }
+        }
+        
+        stage("Code"){
+                environment {
+                name= "Abhi"
+                    topics = 'local'
+                }
+            steps{
+                echo "My name is $name "
+                echo "Here I am using $topics variable"
+            }
+        }
+        stage("build"){
+            steps{
+                sh 'cal 10 2023'
+           //     echo "My name is $person "
+            }
+        }
+        stage("deploy"){
+            steps{
+                sh'''
+                touch file
+                uptime
+                uname
+                '''
+            }
+        }
+    }
+}
