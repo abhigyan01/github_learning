@@ -57,10 +57,10 @@ pipeline {
             steps {
                 script {
                     // Push the Docker image to the registry
-                  //  docker.withRegistry("$DOCKER_REGISTRY", 'docker-credentials-id') {
+                    docker.withRegistry("$DOCKER_REGISTRY", 'docker-credentials-id') {
                         def dockerImage = docker.image("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG")
                         dockerImage.push()
-                   // }
+                    }
                 }
                }  
          }
