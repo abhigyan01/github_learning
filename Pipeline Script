@@ -64,8 +64,8 @@ pipeline {
                         def dockerImage = docker.image("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG")
                         dockerImage.push()*/
                       //  docker login -u "$DOCKER_REGISTRY" -p "docker-credentials-id"
-                        withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY"
+                     //   withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                      //  sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY"
                         sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
                     
                     }
