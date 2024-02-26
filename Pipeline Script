@@ -50,10 +50,8 @@ pipeline {
                 script {
                     // Build the Docker image
                     //docker.build("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG", "-f $DOCKERFILE_PATH .")
-                    //sh "docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH ."
-                     withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY"
-                        sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+                    sh "docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH ."
+
                 }
             }
         }
@@ -66,7 +64,10 @@ pipeline {
                         def dockerImage = docker.image("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG")
                         dockerImage.push()*/
                       //  docker login -u "$DOCKER_REGISTRY" -p "docker-credentials-id"
-                    sh 'docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG'
+                         withCredentials([usernamePassword(credentialsId: 'docker-credentials-id', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD $DOCKER_REGISTRY"
+                        sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+                    
                     }
                 }
             }  
