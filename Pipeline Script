@@ -9,7 +9,8 @@ pipeline {
         IMAGE_TAG = "latest"
         DOCKERFILE_PATH = "Dockerfile" // Path to your Dockerfile
        // DOCKER_REGISTRY = "abhigyan01/jenkins"
-        DOCKER_ACCESS_TOKEN = credentials('docker-credentials-id')
+      //  DOCKER_ACCESS_TOKEN = credentials('docker-credentials-id')//docker-hub-credentials
+        DOCKER_ACCESS_TOKEN = credentials('docker-hub-credentials')
     }
    // parameters {
      //   string(name:"person", defaultValue:"nothing", description:"")
