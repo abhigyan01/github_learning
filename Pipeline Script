@@ -1,7 +1,5 @@
 pipeline {
-    agent any
-    
-
+    agent any    
 
     environment {
          name= "Abhigyan Bhattacharjee"
@@ -47,7 +45,6 @@ pipeline {
                 '''
             }
         }
-        stages {
         stage('Build Docker Image') {
             steps {
                 script {
