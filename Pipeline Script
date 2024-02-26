@@ -5,9 +5,9 @@ pipeline {
         name= "Abhigyan Bhattacharjee"
         topics = 'DevOps'
     }
-    parameters {
-        string(name:"person", defaultValue:"nothing", description:"")
-    }
+   // parameters {
+     //   string(name:"person", defaultValue:"nothing", description:"")
+    //}
     stages{
         stage("Hello"){
             steps{
