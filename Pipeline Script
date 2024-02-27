@@ -8,8 +8,10 @@ pipeline {
         IMAGE_NAME = "jenkins"
         IMAGE_TAG = "latest"
         DOCKERFILE_PATH = "Dockerfile" // Path to your Dockerfile
-       // DOCKER_REGISTRY = "abhigyan01/jenkins"
-       DOCKER_ACCESS_TOKEN = credentials('docker-credentials-id')//docker-hub-credentials
+       REGISTRY = "abhigyan01/jenkins"
+       registryCredential = 'dockerhub_id'
+        dockerImage = ''
+       //DOCKER_ACCESS_TOKEN = credentials('docker-credentials-id')//docker-hub-credentials
        // DOCKER_ACCESS_TOKEN = credentials('docker-hub-credentials')
     }
    // parameters {
@@ -62,13 +64,22 @@ pipeline {
             steps {
                script {
                     // Login to Docker registry using access token
-                    withDockerRegistry([credentialsId: 'docker-credentials-id']) {
-                    sh "docker login -u _token -p $DOCKER_ACCESS_TOKEN $DOCKER_REGISTRY"
-                    }
+                    // withCredentials([usernamePassword(credentialsId: 'myregistry-login', passwordVariable: 'DOCKER_REGISTRY_PWD', usernameVariable: 'DOCKER_REGISTRY_USER')]) 
+                   // withDockerRegistry([credentialsId: 'docker-credentials-id']) {
+                   // sh "docker login -u _token -p $DOCKER_ACCESS_TOKEN $DOCKER_REGISTRY"
+                   // }
                    // Push Docker image to registry
-                    sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+                    //sh "docker push $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG"
+                    docker.withRegistry( '', registryCredential ) {
+                    dockerImage.push()
+                    }
                 } 
             }  
+        }
+        stage('Cleaning up') {
+            steps{
+                sh "docker rmi $registry:$BUILD_NUMBER"
+            }
         }
     } 
 }
