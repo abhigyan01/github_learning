@@ -55,7 +55,8 @@ pipeline {
                 script {
                     // Build the Docker image
                     //docker.build("$DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG", "-f $DOCKERFILE_PATH .")
-                    sh "docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH ."
+                    //sh "docker build -t $DOCKER_REGISTRY/$IMAGE_NAME:$IMAGE_TAG -f $DOCKERFILE_PATH ."
+                    dockerImage = docker.build REGISTRY + ":$BUILD_NUMBER"
 
                 }
             }
@@ -78,7 +79,7 @@ pipeline {
         }
         stage('Cleaning up') {
             steps{
-                sh "docker rmi $registry:$BUILD_NUMBER"
+                sh "docker rmi $REGISTRY:$BUILD_NUMBER"
             }
         }
     } 
