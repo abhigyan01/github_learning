@@ -1,3 +1,3 @@
 <?php
-echo "Hello, World! This a Blue App";
+echo "Hello, World! This a Green App";
 ?>
