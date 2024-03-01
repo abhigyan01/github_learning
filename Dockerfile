@@ -8,4 +8,4 @@ WORKDIR /var/www/html
 COPY index.php /var/www/html/
 
 # Expose port 80 to allow outside access
-EXPOSE 8081
+EXPOSE 80
