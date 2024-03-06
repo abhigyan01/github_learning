@@ -45,6 +45,13 @@ pipeline {
                 } 
             }  
         }
+
+        stage("kubernetes deployment"){
+            steps{
+                sh 'kubectl apply -f deployment.yml'
+            }
+        
+    }
         stage('Cleaning up') {
             steps{
                 sh "docker rmi $REGISTRY:$BUILD_NUMBER"
